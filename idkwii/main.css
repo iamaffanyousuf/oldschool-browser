@@ -1,0 +1,215 @@
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #00ff41;
+    --dim-text: #008f11;
+    --cursor-color: #00ff41;
+    --font-main: 'Courier New', Courier, monospace;
+    --link-color: #00ccff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+}
+
+body::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 100;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+}
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    transition: opacity 0.8s ease;
+}
+
+.terminal-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    margin-bottom: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--dim-text);
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+/* Loading specific styles */
+.log-container {
+    font-size: 0.85rem;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.log-entry {
+    margin: 2px 0;
+    opacity: 0;
+    animation: fadeIn 0.1s forwards;
+}
+
+.log-entry.success::before {
+    content: "[ OK ] ";
+    color: var(--text-color);
+}
+
+.log-entry.process::before {
+    content: "[ >> ] ";
+    color: var(--dim-text);
+}
+
+/* Search Interface Styles */
+#search-interface {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 10;
+}
+
+#output {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dim-text) transparent;
+}
+
+.result-item {
+    margin-bottom: 20px;
+    border-left: 2px solid var(--dim-text);
+    padding-left: 15px;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.result-title {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.result-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 5px;
+    overflow-wrap: break-word;
+}
+
+.result-link:hover {
+    text-decoration: underline;
+}
+
+.result-snippet {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.prompt {
+    color: var(--text-color);
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+#search-input {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+.status-msg {
+    font-style: italic;
+    color: var(--dim-text);
+    margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Progress Bar */
+.progress-section {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: #1a1a1a;
+    border: 1px solid var(--dim-text);
+    margin-top: 5px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--text-color);
+    transition: width 0.2s;
+}

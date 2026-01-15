@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Search System</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    <!-- BOOT SEQUENCE -->
+    <div id="loading-screen">
+        <div class="terminal-container">
+            <div class="header">
+                <span>SYS_INIT_SEQUENCE</span>
+                <span id="boot-clock">00:00:00</span>
+            </div>
+            <div class="log-container" id="boot-logs"></div>
+            <div class="progress-section">
+                <div style="display:flex; justify-content: space-between; font-size: 0.7rem;">
+                    <span>LOAD_MODULES</span>
+                    <span id="boot-percent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="boot-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH INTERFACE -->
+    <div id="search-interface">
+        <div class="header">
+            <span>WEB_TERMINAL_v1.0</span>
+            <span id="search-clock">00:00:00</span>
+        </div>
+
+        <div id="output">
+            <div class="log-entry">Terminal link established. Type your query below to search the archives or 'help' for
+                commands.</div>
+        </div>
+
+        <div class="input-line">
+            <span class="prompt">guest@web:~$</span>
+            <input type="text" id="search-input" placeholder="search or command..." autofocus autocomplete="off">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
